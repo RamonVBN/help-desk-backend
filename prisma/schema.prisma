@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  TECHNICIAN
+  CLIENT
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+  role     Role @default(CLIENT)
+
+  imageUrl String? @map("image_url")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  technician TechnicianInfo?
+
+  clientCalleds Called[] @relation("client")
+  technicianCalleds Called[] @relation("technician")
+
+  @@map("users")
+}
+
+model TechnicianInfo {
+  id             String   @id @default(uuid())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId         String   @unique
+  availableHours String[] @default(["08:00", "09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00"])
+
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("technician_infos")
+}
+
+enum serviceStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model Service {
+  id        String        @id @default(uuid())
+  name      String
+  price     Float
+  status    serviceStatus @default(ACTIVE)
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  called Called[]
+
+  @@map("services")
+}
+
+
+model AdditionalService {
+
+  id        String        @id @default(uuid())
+  description String
+  price Int
+
+  called Called @relation(fields: [calledId], references: [id], onDelete: Cascade)
+  calledId String
+
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  @@map("additional_services")
+
+}
+
+enum calledStatus {
+  OPEN
+  PROGRESS
+  CLOSED
+}
+
+model Called {
+  id          String       @id @default(uuid())
+  title String 
+  description String
+
+  status      calledStatus @default(OPEN)
+
+  client   User     @relation(fields: [clientId], references: [id], name: "client", onDelete: Cascade)
+  clientId String
+
+  technician   User    @relation(fields: [technicianId], references: [id], name: "technician")
+  technicianId String
+
+  service   Service    @relation(fields: [serviceId], references: [id])
+  serviceId String
+
+  additionalServices AdditionalService[]
+
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@map("calleds")
+}
