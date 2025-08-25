@@ -8,7 +8,7 @@ export  function verifyAuthorization(role: string[]){
 
         if (!request.user || !role.includes(request.user.role)) {
             
-            throw new AppError('Não Autorizado.', 401)
+            throw new AppError('Não Autorizado.', 403)
         }
 
         return next()

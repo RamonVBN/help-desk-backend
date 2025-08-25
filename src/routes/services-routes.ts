@@ -12,7 +12,7 @@ servicesRoutes.use(authenticate)
 
 servicesRoutes.post('/', verifyAuthorization(['ADMIN']), controller.create)  
 
-servicesRoutes.get('/', verifyAuthorization(['ADMIN']), controller.index)
+servicesRoutes.get('/', verifyAuthorization(['ADMIN', 'CLIENT']), controller.index)
 
 servicesRoutes.put('/:serviceId', verifyAuthorization(['ADMIN']), controller.update)
 

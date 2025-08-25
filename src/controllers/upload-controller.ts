@@ -23,13 +23,13 @@ export class UploadController {
 
         const file = fileSchema.parse(request.file)
 
-        const {filename} = await diskStorage.saveFile(file.filename)
+        const { filename } = await diskStorage.saveFile(file.filename)
 
         const userId = request.user?.id
 
         if (!userId) {
             
-            throw new AppError('Usuário não autenticado.')
+            throw new AppError('Usuário não autenticado.', 401)
         }
 
         const user = await prisma.user.findUnique({
@@ -53,9 +53,9 @@ export class UploadController {
         })
 
         response.json({filename})
-
+        return
        } catch (error) {
-
+        console.log(error)
         if (error instanceof ZodError) {
 
             if (request.file) {
@@ -80,7 +80,7 @@ export class UploadController {
 
         if (!userId) {
             
-            throw new AppError('Usuário não autenticado.')
+            throw new AppError('Usuário não autenticado.', 4001)
         }
         
         const user = await prisma.user.findUnique({
@@ -106,5 +106,6 @@ export class UploadController {
         })
 
         response.status(200).json()
+        return
     }
 }

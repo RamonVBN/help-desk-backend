@@ -15,7 +15,7 @@ const ACCEPTED_IMAGE_TYPES = ["image/jpeg", 'image/jpg', 'image/png']
 const MULTER = {
     storage: multer.diskStorage({
         destination: TMP_FOLDER,
-        filename(request, file, callback) {
+        filename(_, file, callback) {
             
             const fileHash = crypto.randomBytes(10).toString('hex')
             const fileName = `${fileHash}-${file.originalname}`

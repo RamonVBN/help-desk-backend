@@ -75,7 +75,7 @@ model AdditionalService {
 
   id        String        @id @default(uuid())
   description String
-  price Int
+  price Float
 
   called Called @relation(fields: [calledId], references: [id], onDelete: Cascade)
   calledId String

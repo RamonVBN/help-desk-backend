@@ -19,18 +19,15 @@ usersRoutes.post('/', controller.create)
 // Private Routes
 usersRoutes.use(authenticate)
 
-usersRoutes.get('/client', verifyAuthorization(['ADMIN']), controller.client.index)
+usersRoutes.get('/me', controller.show)
 
-usersRoutes.put('/client/:clientId', verifyAuthorization(['ADMIN', 'CLIENT']), controller.client.update)
+usersRoutes.put('/:targetUserId', controller.update)
 
-usersRoutes.delete('/client/:clientId', verifyAuthorization(['ADMIN', 'CLIENT']), controller.client.delete)
+usersRoutes.get('/', verifyAuthorization(['ADMIN']), controller.index)
 
-//
+usersRoutes.delete('/:clientId', verifyAuthorization(['ADMIN']), controller.delete)
 
-// Tech
 
-usersRoutes.get('/tech', verifyAuthorization(['ADMIN']), controller.tech.index)
 
-usersRoutes.put('/tech/:techId', verifyAuthorization(['ADMIN', 'TECHNICIAN']), controller.tech.update)
 
 

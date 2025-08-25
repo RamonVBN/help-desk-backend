@@ -4,36 +4,28 @@ import { Request, Response, NextFunction } from "express"
 import { verify } from "jsonwebtoken"
 
 interface TokenPayload {
-    role:string,
-    sub: string
+  role: string,
+  sub: string
 }
 
-export async function authenticate(request: Request, _: Response, next: NextFunction){
-    
-    try {
-        
-        const authHeader = request.headers.authorization
-    
-        if (!authHeader) {
-            
-            throw new AppError('Token não informado.', 401)
-        }
-    
-        const [, token] = authHeader?.split(' ')
+export function authenticate(request: Request, response: Response, next: NextFunction) {
+  const token = request.cookies.access_token;
 
-        const {secret} = authConfig.jwt
-    
-        const {role, sub: user_id } = verify(token, secret) as TokenPayload
-    
-        request.user = {
-            id: user_id,
-            role
-        }
+  if (!token) {
+    response.status(401).json({ error: "Token não encontrado" })
+  }
 
-        return next()
+  try {
+    const { role, sub: user_id } = verify(token, authConfig.jwt.secret) as TokenPayload
 
-    } catch (error) {
-        throw new AppError('Token JWT inválido.', 401)
-    }
+    request.user = {
+      id: user_id,
+      role
+    } // usuário na requisição
 
+    next()
+  } catch (err) {
+
+    throw new AppError("Token inválido ou expirado", 401)
+  }
 }

@@ -18,11 +18,4 @@ calledsRoutes.get('/', verifyAuthorization(['ADMIN', 'TECHNICIAN', 'CLIENT']), c
 calledsRoutes.patch('/:calledId', verifyAuthorization(['ADMIN', 'TECHNICIAN']), controller.status)
 
 
-// Add Services
-
-
-calledsRoutes.post('/add-services', verifyAuthorization(['TECHNICIAN']), controller.addService.create)
-
-calledsRoutes.delete('/add-services/:addServiceId', verifyAuthorization(['TECHNICIAN']), controller.addService.remove)
-
 
