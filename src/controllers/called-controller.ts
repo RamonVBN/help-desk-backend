@@ -249,6 +249,61 @@ export class CalledController {
         }
     }
 
+    async show(request: Request, response: Response) {
+
+        const paramsSchema = z.object({
+            calledId: z.string().uuid()
+        })
+
+        const { calledId } = paramsSchema.parse(request.params)
+
+        const called = await prisma.called.findUnique({
+            where: {
+                id: calledId
+            },
+            include: {
+                service: {
+                    select: {
+                        id: true,
+                        name: true,
+                        price: true,
+                        status: true
+                    }
+                },
+                client: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                        imageUrl: true
+                    }
+                },
+                technician: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                        imageUrl: true
+                    }
+                },
+                additionalServices: {
+                    select: {
+                        id: true,
+                        description: true,
+                        price: true
+                    }
+                }
+            }
+        })
+
+        if (!called) {
+            throw new AppError('Chamado não encontrado.')
+        }
+
+        response.status(200).json({called})
+        return
+    }
+
     async status(request: Request, response: Response) {
         const paramsSchema = z.object({
             calledId: z.string()

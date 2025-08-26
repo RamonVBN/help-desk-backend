@@ -15,6 +15,8 @@ calledsRoutes.post('/', verifyAuthorization(['CLIENT']), controller.create)
 
 calledsRoutes.get('/', verifyAuthorization(['ADMIN', 'TECHNICIAN', 'CLIENT']), controller.index)
 
+calledsRoutes.get('/:calledId', verifyAuthorization(['ADMIN', 'TECHNICIAN', 'CLIENT']), controller.show)
+
 calledsRoutes.patch('/:calledId', verifyAuthorization(['ADMIN', 'TECHNICIAN']), controller.status)
 
 
