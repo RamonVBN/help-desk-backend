@@ -8,7 +8,7 @@ export class AdditionalServicesController {
     async create(request: Request, response: Response) {
         const bodySchema = z.object({
             description: z.string().min(3),
-            price: z.coerce.number().gte(1),
+            price: z.coerce.number().gte(1).lte(1000),
             calledId: z.string().uuid()
         })
 
@@ -42,7 +42,7 @@ export class AdditionalServicesController {
         })
 
         response.status(201).json()
-
+        return
     }
 
     async remove(request: Request, response: Response) {
@@ -60,7 +60,7 @@ export class AdditionalServicesController {
 
         if (!additionalService) {
 
-            throw new AppError('Não há nenhum serviço adicional existente com esse ID.')
+            throw new AppError('Serviço adicional não encontrado.')
         }
 
         const { calledId } = additionalService
@@ -93,5 +93,6 @@ export class AdditionalServicesController {
         })
 
         response.status(200).json()
+        return
     }
 }

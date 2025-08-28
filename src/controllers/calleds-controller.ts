@@ -71,6 +71,7 @@ export class CalledController {
         })
 
         response.status(201).json()
+        return
     }
 
     async index(request: Request, response: Response) {

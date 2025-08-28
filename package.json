@@ -2,10 +2,15 @@
   "name": "help-desk-api",
   "version": "1.0.0",
   "main": "index.js",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src/* --out-dir build",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand",
+    "seed": "prisma db seed"
   },
   "keywords": [],
   "author": "",
@@ -29,10 +34,15 @@
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
     "@types/multer": "^2.0.0",
     "@types/node": "^24.0.3",
+    "@types/supertest": "^6.0.3",
     "i": "^0.3.7",
+    "jest": "^30.0.5",
     "npm": "^11.4.2",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"

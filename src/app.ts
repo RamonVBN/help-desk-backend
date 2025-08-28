@@ -7,7 +7,6 @@ import cors from "cors";
 
 import uploadConfig from '@/configs/upload'
 
-
 export const app = express()
 
 app.use(cors({

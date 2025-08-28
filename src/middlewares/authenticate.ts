@@ -25,7 +25,6 @@ export function authenticate(request: Request, response: Response, next: NextFun
 
     next()
   } catch (err) {
-    console.log(err)
     throw new AppError("Token inválido ou expirado", 401)
   }
 }

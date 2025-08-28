@@ -1,4 +1,4 @@
-import { ServiceController } from "@/controllers/service-controller";
+import { ServiceController } from "@/controllers/services-controller";
 import { authenticate } from "@/middlewares/authenticate";
 import { verifyAuthorization } from "@/middlewares/verifyAuthorization";
 import { Router} from "express";

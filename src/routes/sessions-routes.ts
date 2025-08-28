@@ -1,4 +1,5 @@
-import { SessionController } from "@/controllers/session-controller";
+import { SessionController } from "@/controllers/sessions-controller";
+import { authenticate } from "@/middlewares/authenticate";
 import { Router } from "express";
 
 export const sessionRoutes = Router()
@@ -6,5 +7,5 @@ const controller = new SessionController()
 
 sessionRoutes.post('/', controller.create)
 
-sessionRoutes.delete('/', controller.remove)
+sessionRoutes.delete('/', authenticate, controller.remove)
 

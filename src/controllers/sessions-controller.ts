@@ -59,9 +59,11 @@ export class SessionController {
     async remove(_: Request, response: Response) {
 
         response.clearCookie('access_token', {
-            httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
+            httpOnly: true,    // não acessível via JS -> mais seguro
+            secure: false,      // só HTTPS (em dev, false)
+            sameSite: "lax",   // previne CSRF na maioria dos casos
+            path: "/",         // válido em todo o site
+
         });
         response.status(200).json();
         return

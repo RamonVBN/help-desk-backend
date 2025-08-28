@@ -4,10 +4,9 @@ import { Request, Response } from "express";
 import { z } from 'zod'
 import { compare, hash } from 'bcrypt'
 
-
 export class UserController {
 
-    async show(request: Request, response: Response) {
+    async showMe(request: Request, response: Response) {
 
         if (!request.user) {
 
@@ -63,6 +62,58 @@ export class UserController {
         return
     }
 
+    async show(request: Request, response: Response) {
+
+        const paramsSchema = z.object({
+            userId: z.string().uuid()
+        })
+
+        const { userId } = paramsSchema.parse(request.params)
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId
+            },
+            include: {
+                technician: true
+            }
+        })
+
+        if (!user) {
+            throw new AppError('Usuário não encontrado.')
+        }
+
+        const {id, name, email, imageUrl, role, technician} = user
+
+        if (technician) {
+
+            const { availableHours } = technician
+
+            const userWithoutPassword = {
+                id,
+                role,
+                name,
+                email,
+                imageUrl,
+                availableHours,
+            }
+
+            response.status(200).json({ user: userWithoutPassword })
+            return
+        }
+
+        const userWithoutPassword = {
+            id,
+            role,
+            name,
+            email,
+            imageUrl,
+        }
+
+        response.status(200).json({ user: userWithoutPassword })
+        return
+    }
+
     async index(request: Request, response: Response) {
 
         const querySchema = z.object({
@@ -86,6 +137,9 @@ export class UserController {
                         availableHours: true
                     }
                 }
+            },
+            omit: {
+                password: true
             },
             orderBy: {
                 createdAt: 'desc'

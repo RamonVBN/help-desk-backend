@@ -2,7 +2,7 @@ import { authenticate } from "@/middlewares/authenticate";
 import { verifyAuthorization } from "@/middlewares/verifyAuthorization";
 import { Router} from "express";
 
-import { CalledController } from "@/controllers/called-controller";
+import { CalledController } from "@/controllers/calleds-controller";
 
 
 export const calledsRoutes = Router()
@@ -13,9 +13,9 @@ calledsRoutes.use(authenticate)
 
 calledsRoutes.post('/', verifyAuthorization(['CLIENT']), controller.create)
 
-calledsRoutes.get('/', verifyAuthorization(['ADMIN', 'TECHNICIAN', 'CLIENT']), controller.index)
+calledsRoutes.get('/', controller.index)
 
-calledsRoutes.get('/:calledId', verifyAuthorization(['ADMIN', 'TECHNICIAN', 'CLIENT']), controller.show)
+calledsRoutes.get('/:calledId', controller.show)
 
 calledsRoutes.patch('/:calledId', verifyAuthorization(['ADMIN', 'TECHNICIAN']), controller.status)
 
