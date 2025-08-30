@@ -3,6 +3,7 @@ import { AppError } from "@/utils/AppError";
 import { Request, Response } from "express";
 import { z } from 'zod'
 import { compare, hash } from 'bcrypt'
+import { domainHasMX } from "@/utils/domainHasMx";
 
 export class UserController {
 
@@ -172,6 +173,14 @@ export class UserController {
             throw new AppError('Já existe um usuário com esse email.')
         }
 
+        const domain = email.split('@')[1]
+
+        const mxRecords = await domainHasMX(domain)
+
+        if (mxRecords.length === 0) {
+            throw new AppError('Domínio de email inválido.')
+        }
+
         const hashedPassword = await hash(password, 8)
 
         const { id: userId, } = await prisma.user.create({
@@ -194,7 +203,6 @@ export class UserController {
 
         response.status(201).json()
         return
-
     }
 
     async update(request: Request, response: Response) {

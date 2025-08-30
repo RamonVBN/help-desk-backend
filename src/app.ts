@@ -24,4 +24,3 @@ app.use('/uploads', express.static(uploadConfig.UPLOADS_FOLDER))
 app.use(routes)
 
 app.use(errorHandling)
-

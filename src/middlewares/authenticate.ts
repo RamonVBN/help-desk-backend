@@ -9,7 +9,7 @@ interface TokenPayload {
 }
 
 export function authenticate(request: Request, response: Response, next: NextFunction) {
-  const token = request.cookies.access_token;
+  const token = request.cookies.access_token
 
   if (!token) {
     response.status(401).json({ error: "Token não encontrado" })

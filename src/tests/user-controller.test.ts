@@ -10,13 +10,13 @@ describe('Users Controller', () => {
     afterAll(async () => {
         await prisma.user.delete({
             where: {
-                email: 'testuser2@email.com'
+                email: 'client@email.com'
             }
         })
 
         await prisma.user.delete({
             where: {
-                email: 'testusertech@email.com'
+                email: 'tech@email.com'
             }
         })
 
@@ -26,9 +26,9 @@ describe('Users Controller', () => {
     it('should create a new client user', async () => {
 
         const response = await request(app).post('/users').send({
-            name: 'Test User',
-            email: 'testuser2@email.com',
-            password: 'password123'
+            name: 'Client User',
+            email: 'client@email.com',
+            password: '123456'
         })
 
         expect(response.status).toBe(201)
@@ -37,27 +37,22 @@ describe('Users Controller', () => {
     it('should throw an error if user with same email already exists', async () => {
 
         const response = await request(app).post('/users').send({
-            name: 'Duplicate User',
-            email: 'testuser2@email.com',
-            password: 'password123'
+            name: 'Duplicate Client',
+            email: 'client@email.com',
+            password: '123456'
         })
 
         expect(response.status).toBe(400)
         expect(response.body.message).toBe('Já existe um usuário com esse email.')
 
-        await prisma.user.delete({
-            where: {
-                email: 'testuser2@email.com'
-            }
-        })
     })
 
     it('should throw an error if email is invalid', async () => {
 
         const response = await request(app).post('/users').send({
-            name: 'Test User',
-            email: 'testuser-email.com',
-            password: 'password123'
+            name: 'Client User',
+            email: 'clientuser-email.com',
+            password: '123456'
         })
 
         expect(response.status).toBe(400)
@@ -66,15 +61,15 @@ describe('Users Controller', () => {
 
     it("should return logged user infos", async () => {
 
-        const { cookie } = await loginAndGetCookie({ email: 'testuser2@email.com', password: '123456', name: 'Test User2' })
+        const { cookie } = await loginAndGetCookie({ email: 'client@email.com', password: '123456'})
 
         const res = await request(app).get("/users/me").set("Cookie", cookie)
 
         expect(res.status).toBe(200)
-        expect(res.body.user.email).toBe('testuser2@email.com');
+        expect(res.body.user.email).toBe('client@email.com');
     })
 
-    it("should return logged user infos without cookie", async () => {
+    it("should not return logged user infos without cookie", async () => {
 
         // Faz uma requisição autenticada sem os cookies.
         const res = await request(app).get("/users/me");
@@ -83,11 +78,17 @@ describe('Users Controller', () => {
 
     it('should create a tech user', async () => {
 
-        const { cookie } = await loginAndGetCookie({ email: 'ramon@email.com', password: '123456' })
+        const allowedUser = await prisma.user.findFirst({
+            where: {
+                role: 'ADMIN'
+            }
+        })
+
+        const { cookie } = await loginAndGetCookie({ email: allowedUser!.email, password: '123456' })
 
         const res = await request(app).post('/users').set('Cookie', cookie).send({
-            name: 'Test Tech User',
-            email: 'testusertech@email.com',
+            name: 'Tech User',
+            email: 'tech@email.com',
             password: '123456',
             role: 'TECHNICIAN',
             availableHours: ['7:00']
@@ -98,17 +99,21 @@ describe('Users Controller', () => {
 
     it('should allow to delete a user successfully', async () => {
 
-        const user = await prisma.user.create({
-            data: {
-                name: 'Test User Client',
-                email: 'testclient@email.com',
-                password: '123456'
+        const user = await prisma.user.findFirst({
+            where: {
+                email: 'client@email.com',
             }
         })
 
-        const { cookie } = await loginAndGetCookie({ email: 'ramon@email.com', password: '123456' })
+         const allowedUser = await prisma.user.findFirst({
+            where: {
+                role: 'ADMIN'
+            }
+        })
 
-        const res = await request(app).delete(`/users/${user.id}`).set('Cookie', cookie)
+        const { cookie } = await loginAndGetCookie({ email: allowedUser!.email, password: '123456' })
+
+        const res = await request(app).delete(`/users/${user!.id}`).set('Cookie', cookie)
 
         expect(res.status).toBe(200)
     })
@@ -117,23 +122,26 @@ describe('Users Controller', () => {
 
         const user = await prisma.user.create({
             data: {
-                name: 'Test User Client',
-                email: 'testclient@email.com',
+                name: 'Client User',
+                email: 'client@email.com',
                 password: '123456'
             }
         })
 
-        const { cookie } = await loginAndGetCookie({ email: 'luffy@email.com', password: '123456' })
+         const notAllowedUser = await prisma.user.findFirst({
+            where: {
+                OR: [
+                    {role: 'CLIENT'},
+                    {role: 'TECHNICIAN'}
+                ]
+            }
+        })
+
+        const { cookie } = await loginAndGetCookie({ email: notAllowedUser!.email, password: '123456' })
 
         const res = await request(app).delete(`/users/${user.id}`).set('Cookie', cookie)
 
         expect(res.status).toBe(403)
-
-        await prisma.user.delete({
-            where: {
-                id: user.id
-            }
-        })
     })
 
 })

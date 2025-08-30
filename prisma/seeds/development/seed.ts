@@ -1,4 +1,4 @@
-import { prisma } from '../src/database/prisma'
+import { prisma } from '../../../src/database/prisma'
 
 async function main() {
     await prisma.user.deleteMany()
@@ -8,7 +8,7 @@ async function main() {
     await prisma.user.create({
         data: {
             name: 'Ramon Barros',
-            email: 'ramon@email.com',
+            email: 'ramon@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'ADMIN'
         }
@@ -17,7 +17,7 @@ async function main() {
     const tech1 = await prisma.user.create({
         data: {
             name: 'Eren Jaeger',
-            email: 'eren@email.com',
+            email: 'eren@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'TECHNICIAN',
         }
@@ -26,7 +26,7 @@ async function main() {
     const tech2 = await prisma.user.create({
         data: {
             name: 'Joseph Joestar',
-            email: 'joseph@email.com',
+            email: 'joseph@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'TECHNICIAN'
         }
@@ -35,7 +35,7 @@ async function main() {
     const tech3 = await prisma.user.create({
         data: {
             name: 'Monkey D. Luffy',
-            email: 'luffy@email.com',
+            email: 'luffy@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'TECHNICIAN'
         }
@@ -44,21 +44,21 @@ async function main() {
     await prisma.technicianInfo.create({
         data: {
             userId: tech1.id,
-            availableHours: ['08:00', '09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+            availableHours: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
         }
     })
 
     await prisma.technicianInfo.create({
         data: {
             userId: tech2.id,
-            availableHours: ['10:00', '11:00', '12:00', '13:00', '14:00', '16:00', '17:00', '18:00', '19:00', '20:00']
+            availableHours: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
         }
     })
 
     await prisma.technicianInfo.create({
         data: {
             userId: tech3.id,
-            availableHours: ['12:00', '13:00', '14:00', '16:00', '18:00', '19:00', '20:00', '21:00', '22:00']
+            availableHours: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
         }
     })
 

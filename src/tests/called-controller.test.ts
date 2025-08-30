@@ -8,7 +8,7 @@ describe("Called controller", () => {
     afterAll(async () => {
         await prisma.user.delete({
             where: {
-                email: 'testuser3@email.com'
+                email: 'client@email.com'
             }
         })
 
@@ -17,7 +17,7 @@ describe("Called controller", () => {
 
     // If there's no technician available, will fail, it depends on the time too.
     it('should create a called successfully if theres a technician available', async () => {
-        const { cookie } = await loginAndGetCookie({ email: 'testuser3@email.com', password: '123456', name: 'Test User3' })
+        const { cookie } = await loginAndGetCookie({ email: 'client@email.com', password: '123456', name: 'client' })
 
         const service = await prisma.service.findFirst()
 
@@ -32,7 +32,13 @@ describe("Called controller", () => {
 
     it('should return a list of calleds as an admin', async () => {
 
-        const { cookie } = await loginAndGetCookie({ email: 'ramon@email.com', password: '123456' })
+        const allowedUser = await prisma.user.findFirst({
+            where: {
+                role: 'ADMIN'
+            }
+        })
+
+        const { cookie } = await loginAndGetCookie({ email: allowedUser!.email, password: '123456' })
 
         const res = await request(app).get('/calleds').set('Cookie', cookie)
 
@@ -42,7 +48,13 @@ describe("Called controller", () => {
 
     it('should return a list of calleds as a technician', async () => {
 
-        const { cookie } = await loginAndGetCookie({ email: 'eren@email.com', password: '123456' })
+         const allowedUser = await prisma.user.findFirst({
+            where: {
+                role: 'TECHNICIAN'
+            }
+        })
+
+        const { cookie } = await loginAndGetCookie({ email: allowedUser!.email, password: '123456' })
 
         const res = await request(app).get('/calleds').set('Cookie', cookie)
 
@@ -52,7 +64,7 @@ describe("Called controller", () => {
 
     it('should return a list of calleds as a client', async () => {
 
-        const { cookie } = await loginAndGetCookie({ email: 'testuser3@email.com', password: '123456', name: 'Test User' })
+        const { cookie } = await loginAndGetCookie({ email: 'client@email.com', password: '123456'})
 
         const res = await request(app).get('/calleds').set('Cookie', cookie)
 

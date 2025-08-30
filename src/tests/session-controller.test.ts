@@ -7,7 +7,7 @@ describe('Session Controller', () => {
     afterAll(async () => {
         await prisma.user.delete({
             where: {
-                email: 'testuser1@email.com'
+                email: 'client@email.com'
             }
         })
 
@@ -16,16 +16,14 @@ describe('Session Controller', () => {
 
     it('Should autenticate get access token', async () => {
         
-        // Cria um usuário cliente
         await request(app).post('/users').send({
-            name: 'Test User',
-            email: 'testuser1@email.com',
+            name: 'Client User',
+            email: 'client@email.com',
             password: 'password123'
         })
 
-        // Loga com o usuário criado anteriormente.
         const sessionResponse = await request(app).post('/sessions').send({
-            email: 'testuser1@email.com',
+            email: 'client@email.com',
             password: 'password123'
         })
 

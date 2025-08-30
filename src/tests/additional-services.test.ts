@@ -9,17 +9,19 @@ describe('Additional Services', () => {
     afterEach(async () => {
         await prisma.user.delete({
             where: {
-                email: 'testuser4@email.com'
+                email: 'client@email.com'
             }
         })
+
+        await prisma.$disconnect()
     })
 
     it('should allow to create a new additional service successfully', async () => {
 
         const client = await prisma.user.create({
             data: {
-                name: 'Test User',
-                email: 'testuser4@email.com',
+                name: 'Client User',
+                email: 'client@email.com',
                 password: '123456'
             }
         })
@@ -58,8 +60,8 @@ describe('Additional Services', () => {
 
         const client = await prisma.user.create({
             data: {
-                name: 'Test User',
-                email: 'testuser4@email.com',
+                name: 'Client User',
+                email: 'client@email.com',
                 password: '123456'
             }
         })
@@ -76,7 +78,7 @@ describe('Additional Services', () => {
             data: {
                 title: 'Test Called',
                 description: 'Testing',
-                clientId: client.id,
+                clientId: client!.id,
                 serviceId: service!.id,
                 technicianId: techTest!.id
             }
@@ -99,8 +101,8 @@ describe('Additional Services', () => {
 
         const client = await prisma.user.create({
             data: {
-                name: 'Test User',
-                email: 'testuser4@email.com',
+                name: 'Client User',
+                email: 'client@email.com',
                 password: '123456'
             }
         })
@@ -117,7 +119,7 @@ describe('Additional Services', () => {
             data: {
                 title: 'Test Called',
                 description: 'Testing',
-                clientId: client.id,
+                clientId: client!.id,
                 serviceId: service!.id,
                 technicianId: adminTest!.id
             }
@@ -138,8 +140,8 @@ describe('Additional Services', () => {
 
         const client = await prisma.user.create({
             data: {
-                name: 'Test User',
-                email: 'testuser4@email.com',
+                name: 'Client User',
+                email: 'client@email.com',
                 password: '123456'
             }
         })
@@ -156,7 +158,7 @@ describe('Additional Services', () => {
             data: {
                 title: 'Test Called',
                 description: 'Testing',
-                clientId: client.id,
+                clientId: client!.id,
                 serviceId: service!.id,
                 technicianId: techTest!.id
             }

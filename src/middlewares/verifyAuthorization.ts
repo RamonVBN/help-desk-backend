@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from "express";
 
 export  function verifyAuthorization(role: string[]){
 
-    return (request: Request, response: Response, next: NextFunction) => {
+    return (request: Request, _: Response, next: NextFunction) => {
 
         if (!request.user || !role.includes(request.user.role)) {
             

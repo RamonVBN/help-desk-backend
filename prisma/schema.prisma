@@ -59,7 +59,7 @@ enum serviceStatus {
 
 model Service {
   id        String        @id @default(uuid())
-  name      String
+  name      String @unique
   price     Float
   status    serviceStatus @default(ACTIVE)
   createdAt DateTime      @default(now()) @map("created_at")
@@ -103,7 +103,7 @@ model Called {
   client   User     @relation(fields: [clientId], references: [id], name: "client", onDelete: Cascade)
   clientId String
 
-  technician   User    @relation(fields: [technicianId], references: [id], name: "technician")
+  technician   User    @relation(fields: [technicianId], references: [id], name: "technician", onDelete: Cascade)
   technicianId String
 
   service   Service    @relation(fields: [serviceId], references: [id])
