@@ -12,7 +12,7 @@ export function authenticate(request: Request, response: Response, next: NextFun
   const token = request.cookies.access_token
 
   if (!token) {
-    response.status(401).json({ error: "Token não encontrado" })
+    throw new AppError('Token não encontrado', 401)
   }
 
   try {
