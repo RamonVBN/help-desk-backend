@@ -1,4 +1,4 @@
-import { env } from "../../src/env";
+import { env } from "../env";
 import { execSync } from "child_process";
 
 if (env.NODE_ENV === "production") {

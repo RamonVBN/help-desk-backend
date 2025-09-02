@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "prisma": {
-    "seed": "node build/prisma/seeds/runSeeds.js"
+    "seed": "node ./build/seeds/runSeeds.js"
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -11,7 +11,7 @@
     "start": "node build/src/server.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand",
     "seed": "prisma db seed",
-    "seed:prod": "node build/prisma/seeds/production/seed.js",
+    "seed:prod": "node ./build/seeds/production/seed.js",
     "seed:dev": "ts-node prisma/seeds/development/seed.ts"
   },
   "keywords": [],
