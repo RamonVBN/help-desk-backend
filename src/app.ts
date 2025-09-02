@@ -6,11 +6,12 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 import uploadConfig from '@/configs/upload'
+import { env } from './env';
 
 export const app = express()
 
 app.use(cors({
-  origin: "http://localhost:3000", // frontend Next.js
+  origin: env.CLIENT_BASE_URL, // frontend Next.js
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true, 
 }));
