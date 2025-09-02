@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src/* prisma/seeds/* --out-dir build",
-    "start": "node build/src/server.js",
+    "start": "node build/server.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand",
     "seed": "prisma db seed",
     "seed:prod": "node ./build/seeds/production/seed.js",
