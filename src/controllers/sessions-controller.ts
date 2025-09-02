@@ -1,5 +1,6 @@
 import { authConfig } from '@/configs/auth'
 import { prisma } from '@/database/prisma'
+import { env } from '@/env'
 import { AppError } from '@/utils/AppError'
 import { compare } from 'bcrypt'
 import { Request, Response } from 'express'
@@ -46,8 +47,8 @@ export class SessionController {
 
         response.cookie("access_token", token, {
             httpOnly: true,    // não acessível via JS -> mais seguro
-            secure: true,      // só HTTPS (em dev, false)
-            sameSite: "none",   // previne CSRF na maioria dos casos
+            secure: env.NODE_ENV === 'production',      // só HTTPS (em dev, false)
+            sameSite: "lax",   // previne CSRF na maioria dos casos
             maxAge: 1000 * 60 * 120, // 15 min
             path: "/",         // válido em todo o site
 
@@ -60,8 +61,8 @@ export class SessionController {
 
         response.clearCookie('access_token', {
             httpOnly: true,    // não acessível via JS -> mais seguro
-            secure: true,      // só HTTPS (em dev, false)
-            sameSite: "none",   // previne CSRF na maioria dos casos
+            secure: env.NODE_ENV === 'production',      // só HTTPS (em dev, false)
+            sameSite: "lax",   // previne CSRF na maioria dos casos
             path: "/",         // válido em todo o site
 
         });
