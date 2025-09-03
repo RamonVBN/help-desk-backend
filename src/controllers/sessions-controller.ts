@@ -52,7 +52,7 @@ export class SessionController {
             maxAge: 1000 * 60 * 120, // 15 min
             path: "/",         // válido em todo o site
 
-        }).status(201).redirect('/calleds')
+        }).status(201)
         return
 
     }
