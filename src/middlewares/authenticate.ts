@@ -8,7 +8,7 @@ interface TokenPayload {
   sub: string
 }
 
-export function authenticate(request: Request, response: Response, next: NextFunction) {
+export function authenticate(request: Request, _: Response, next: NextFunction) {
   const token = request.cookies.access_token
 
   if (!token) {
