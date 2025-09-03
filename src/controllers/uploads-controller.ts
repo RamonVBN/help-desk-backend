@@ -54,6 +54,7 @@ export class UploadController {
 
         response.json({filename})
         return
+
        } catch (error) {
         console.log(error)
         if (error instanceof ZodError) {
