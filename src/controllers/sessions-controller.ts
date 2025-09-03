@@ -61,8 +61,8 @@ export class SessionController {
 
         response.clearCookie('access_token', {
             httpOnly: true,    // não acessível via JS -> mais seguro
-            secure: env.NODE_ENV === 'production',      // só HTTPS (em dev, false)
-            sameSite: env.NODE_ENV === 'production' ? 'none': 'lax',  // previne CSRF na maioria dos casos
+            secure: true,      // só HTTPS (em dev, false)
+            sameSite: 'none',  // previne CSRF na maioria dos casos
             path: "/",         // válido em todo o site
 
         }).status(200).json()
