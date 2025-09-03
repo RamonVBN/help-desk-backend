@@ -52,7 +52,7 @@ export class SessionController {
             maxAge: 1000 * 60 * 120, // 15 min
             path: "/",         // válido em todo o site
 
-        }).status(201).json()
+        }).status(201).redirect('/calleds')
         return
 
     }
@@ -65,8 +65,7 @@ export class SessionController {
             sameSite: env.NODE_ENV === 'production' ? 'none': 'lax',  // previne CSRF na maioria dos casos
             path: "/",         // válido em todo o site
 
-        });
-        response.status(200).json();
+        }).status(200).json()
         return
     }
 }
