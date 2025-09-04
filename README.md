@@ -37,7 +37,7 @@ npm install
 npx prisma migrate dev
 
 # Rodar seeds de desenvolvimento
-npx prisma db seed
+npm run seed:dev
 
 # Iniciar o servidor
 npm run dev
