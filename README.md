@@ -60,11 +60,11 @@ CLIENT_BASE_URL="..."
 
 ### 🪪 Cargos
 
-ADMIN → Gerencia toda a aplicação, chamados, serviços, seu próprio perfil e de outros usuários.
+#### ADMIN → Gerencia toda a aplicação, chamados, serviços, seu próprio perfil e de outros usuários.
 
-TECHNICIAN → Gerencia os chamados atribuídos a ele e seu próprio perfil.
+#### TECHNICIAN → Gerencia os chamados atribuídos a ele e seu próprio perfil.
 
-CLIENT → Capaz de criar novos chamados, acompanhá-los e gerenciar o próprio perfil. 
+#### CLIENT → Capaz de criar novos chamados, acompanhá-los e gerenciar o próprio perfil. 
 
 ---
 
