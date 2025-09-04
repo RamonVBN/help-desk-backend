@@ -70,14 +70,14 @@ CLIENT → Capaz de criar novos chamados, acompanhá-los e gerenciar o próprio 
 
 ### 📚 Endpoints
 
-🔐 🔑 Sessões
+#### 🔐 🔑 Sessões
 
 POST /sessions → Faz login e seta cookie HttpOnly.
 
 DELETE /sessions → Remove cookie de sessão, logout.
 
 
-🎫 Chamados
+#### 🎫 Chamados
 
 GET /calleds → Lista chamados. (Todos os usuários, porém com comportamento diferente para cada um)
 
@@ -88,7 +88,7 @@ GET /calleds/:id → Detalhes de um chamado. (Todos os usuários.)
 PATCH /calleds/:id → Atualiza status do chamado. (Apenas administrador e técnico)
 
 
-💰 Serviços
+#### 💰 Serviços
 
 POST /services → Cria serviço. (Apenas administrador)
 
@@ -99,14 +99,14 @@ PUT /services/:id → Atualiza nome e preço do serviço. (Apenas administrador)
 PATCH /services/:id → Atualiza status do serviço. (Apenas administrador)
 
 
-🤳 Uploads
+#### 🤳 Uploads
 
 POST /uploads → Faz upload de uma foto de perfil. (Todos os usuários)
 
 DELETE /uploads → Remove a foto do perfil. (Todos os usuários)
 
 
-🫏 Usuários
+#### 🫏 Usuários
 
 POST /users → Cria uma conta de usuário. (Cliente e administrador)
 
@@ -121,7 +121,7 @@ PUT /users/:id → Atualiza nome, email, senha e carga horário, depende da role
 DELETE /users/:id → Excluí uma conta de usuário. (Apenas administrador)
 
 
-💸 Serviços adicionais
+#### 💸 Serviços adicionais
 
 POST /additional-services → Cria um serviço adicional.  (Apenas técnico)
 
@@ -129,14 +129,14 @@ DELETE /additional-services → Excluí um serviço adicional. (Apenas técnico)
 
 ---
 
-✅ Status
+### ✅ Status
 
 - [X] Em desenvolvimento
 - [ ] Em produção
 
 ---
 
-🗿 Autor
+### 🗿 Autor
 
 Ramon Barros – @RamonVBN
 
