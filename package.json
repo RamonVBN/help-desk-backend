@@ -12,7 +12,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand",
     "seed": "prisma db seed",
     "seed:prod": "node ./build/seeds/production/seed.js",
-    "seed:dev": "ts-node prisma/seeds/development/seed.ts"
+    "seed:dev": "ts-node ./src/seeds/development/seed.ts"
   },
   "keywords": [],
   "author": "",
