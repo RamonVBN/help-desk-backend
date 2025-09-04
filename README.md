@@ -33,7 +33,7 @@ cd help-desk-backend
 # Instalar dependências
 npm install
 
-# Rodar migrations (se houver)
+# Rodar migrations
 npx prisma migrate dev
 
 # Rodar seeds de desenvolvimento
@@ -48,8 +48,13 @@ npm run dev
 ```bash
 
 # Variáveis de ambiente
+NODE_ENV=
+PORT=
 DATABASE_URL="..."
 JWT_SECRET="..."
+BASE_URL="..."
+CLIENT_BASE_URL="..."
+
 ```
 ---
 
