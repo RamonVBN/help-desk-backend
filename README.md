@@ -1,6 +1,6 @@
 # 📌 HelpDesk API
 
-API para gerenciamento de chamados de suporte de T.I.
+API REST em Express.js para gerenciamento de chamados de suporte de T.I, utilizando RBAC e autenticação via cookies http-only.
 
 ---
 
@@ -21,23 +21,23 @@ API para gerenciamento de chamados de suporte de T.I.
 
 ---
 
-## ⚙️ Instalação
+## ⚙️ Instalação e uso
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/SEU-USUARIO/NOME-DA-API.git
+git clone https://github.com/ramonvbn/help-desk-backend.git
 
 # Entrar na pasta
-cd NOME-DA-API
+cd help-desk-backend
 
 # Instalar dependências
 npm install
 
-# Rodar migrations (se houver)
+# Rodar migrations
 npx prisma migrate dev
 
 # Rodar seeds de desenvolvimento
-npx prisma db seed
+npm run seed:dev
 
 # Iniciar o servidor
 npm run dev
@@ -48,31 +48,36 @@ npm run dev
 ```bash
 
 # Variáveis de ambiente
+NODE_ENV=
+PORT=
 DATABASE_URL="..."
 JWT_SECRET="..."
+BASE_URL="..."
+CLIENT_BASE_URL="..."
+
 ```
 ---
 
-🪪 Cargos
+### 🪪 Cargos
 
-ADMIN - Gerencia toda a aplicação, chamados, serviços, seu próprio perfil e de outros usuários.
+#### ADMIN → Gerencia toda a aplicação, chamados, serviços, seu próprio perfil e de outros usuários.
 
-TECHNICIAN - Gerencia os chamados atribuídos a ele e seu próprio perfil.
+#### TECHNICIAN → Gerencia os chamados atribuídos a ele e seu próprio perfil.
 
-CLIENT - Capaz de criar novos chamados, acompanhá-los e gerenciar o próprio perfil. 
+#### CLIENT → Capaz de criar novos chamados, acompanhá-los e gerenciar o próprio perfil. 
 
 ---
 
-📚 Endpoints
+### 📚 Endpoints
 
-🔐 🔑 Sessões
+#### 🔐 🔑 Sessões
 
 POST /sessions → Faz login e seta cookie HttpOnly.
 
 DELETE /sessions → Remove cookie de sessão, logout.
 
 
-🎫 Chamados
+#### 🎫 Chamados
 
 GET /calleds → Lista chamados. (Todos os usuários, porém com comportamento diferente para cada um)
 
@@ -83,7 +88,7 @@ GET /calleds/:id → Detalhes de um chamado. (Todos os usuários.)
 PATCH /calleds/:id → Atualiza status do chamado. (Apenas administrador e técnico)
 
 
-💰 Serviços
+#### 💰 Serviços
 
 POST /services → Cria serviço. (Apenas administrador)
 
@@ -94,14 +99,14 @@ PUT /services/:id → Atualiza nome e preço do serviço. (Apenas administrador)
 PATCH /services/:id → Atualiza status do serviço. (Apenas administrador)
 
 
-🤳 Uploads
+#### 🤳 Uploads
 
 POST /uploads → Faz upload de uma foto de perfil. (Todos os usuários)
 
 DELETE /uploads → Remove a foto do perfil. (Todos os usuários)
 
 
-🫏 Usuários
+#### 🫏 Usuários
 
 POST /users → Cria uma conta de usuário. (Cliente e administrador)
 
@@ -116,7 +121,7 @@ PUT /users/:id → Atualiza nome, email, senha e carga horário, depende da role
 DELETE /users/:id → Excluí uma conta de usuário. (Apenas administrador)
 
 
-💸 Serviços adicionais
+#### 💸 Serviços adicionais
 
 POST /additional-services → Cria um serviço adicional.  (Apenas técnico)
 
@@ -124,14 +129,14 @@ DELETE /additional-services → Excluí um serviço adicional. (Apenas técnico)
 
 ---
 
-✅ Status
+### ✅ Status
 
 - [X] Em desenvolvimento
 - [ ] Em produção
 
 ---
 
-🗿 Autor
+### 🗿 Autor
 
 Ramon Barros – @RamonVBN
 
