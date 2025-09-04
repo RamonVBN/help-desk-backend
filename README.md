@@ -36,8 +36,12 @@ npm install
 # Rodar migrations (se houver)
 npx prisma migrate dev
 
+# Rodar seeds de desenvolvimento
+npx prisma db seed
+
 # Iniciar o servidor
 npm run dev
+
 ```
 ---
 
