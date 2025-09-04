@@ -10,11 +10,12 @@ import { env } from './env';
 
 export const app = express()
 
-app.use(cors({
-  origin: env.CLIENT_BASE_URL, // frontend Next.js
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  credentials: true, 
-}));
+// app.use(cors({
+//   origin: [env.CLIENT_BASE_URL], // frontend Next.js
+//   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+//   credentials: true,
+//   allowedHeaders: ["Content-Type", "Authorization", 'Cookie']
+// }));
 
 app.use(cookieParser())
 
