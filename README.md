@@ -21,7 +21,7 @@ API REST em Express.js para gerenciamento de chamados de suporte de T.I, utiliza
 
 ---
 
-## ⚙️ Instalação
+## ⚙️ Instalação e uso
 
 ```bash
 # Clonar o repositório
