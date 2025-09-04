@@ -25,10 +25,10 @@ API para gerenciamento de chamados de suporte de T.I.
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/SEU-USUARIO/NOME-DA-API.git
+git clone https://github.com/ramonvbn/help-desk-backend.git
 
 # Entrar na pasta
-cd NOME-DA-API
+cd help-desk-backend
 
 # Instalar dependências
 npm install
