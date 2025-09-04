@@ -58,7 +58,7 @@ CLIENT_BASE_URL="..."
 ```
 ---
 
-🪪 Cargos
+### 🪪 Cargos
 
 ADMIN → Gerencia toda a aplicação, chamados, serviços, seu próprio perfil e de outros usuários.
 
@@ -68,7 +68,7 @@ CLIENT → Capaz de criar novos chamados, acompanhá-los e gerenciar o próprio 
 
 ---
 
-📚 Endpoints
+### 📚 Endpoints
 
 🔐 🔑 Sessões
 
