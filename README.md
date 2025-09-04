@@ -13,7 +13,7 @@ API para gerenciamento de chamados de suporte de T.I.
 - [x] PostgreSQL
 - [X] Zod
 - [X] Multer
-- [X] Bcrypy
+- [X] Bcrypt
 - [X] JWT
 - [X] Jest
 - [X] Supertest
