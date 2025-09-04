@@ -1,6 +1,6 @@
 # 📌 HelpDesk API
 
-API para gerenciamento de chamados de suporte de T.I.
+API REST em Express.js para gerenciamento de chamados de suporte de T.I, utilizando RBAC e autenticação via cookies http-only.
 
 ---
 
