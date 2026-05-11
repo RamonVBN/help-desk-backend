@@ -10,6 +10,8 @@ import { env } from './env';
 
 export const app = express()
 
+app.set("trust proxy", 1)
+
 app.use(cors({
   origin: [env.CLIENT_BASE_URL], // frontend Next.js
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
