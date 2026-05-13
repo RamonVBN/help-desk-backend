@@ -296,6 +296,6 @@ O projeto segue padrões como:
 
 Desenvolvido por Ramon Victor Barros Nunes.
 
-* GitHub: [https://github.com/ramonvbn](https://github.com/ramonvbn)
-* LinkedIn: [https://linkedin.com/in/seu-linkedin](https://linkedin.com/in/seu-linkedin)
+* GitHub: [https://github.com/RamonVBN](https://github.com/RamonVBN)
+* LinkedIn: [https://linkedin.com/in/ramon-barros-4a107837a](https://linkedin.com/in/ramon-barros-4a107837a)
   
