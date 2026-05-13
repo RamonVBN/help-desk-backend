@@ -5,7 +5,6 @@ import { verifyAuthorization } from "@/middlewares/verifyAuthorization";
 import { UserController } from "@/controllers/users-controller";
 
 
-
 export const usersRoutes = Router()
 
 const controller = new UserController()

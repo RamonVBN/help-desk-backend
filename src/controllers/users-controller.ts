@@ -284,6 +284,11 @@ export class UserController {
 
             if (user.role === 'TECHNICIAN') {
 
+                if (!availableHours || availableHours.length === 0) {
+
+                    throw new AppError('Não é possível atualizar uma conta de técnico sem sua respectiva carga horária.')
+                }
+
                 await prisma.user.update({
                     where: {
                         id: targetUserId
@@ -294,12 +299,14 @@ export class UserController {
                     }
                 })
 
+                const orderedAvailableHours = availableHours.sort((a, b) => Number(a.split(':')[0]) - Number(b.split(':')[0]))
+
                 await prisma.technicianInfo.update({
                     where: {
                         userId: targetUserId
                     },
                     data: {
-                        availableHours
+                        availableHours: orderedAvailableHours
                     }
                 })
 
