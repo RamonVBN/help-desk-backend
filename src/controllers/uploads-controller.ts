@@ -1,112 +1,141 @@
-import { Request, Response } from "express";
-import {z, ZodError} from 'zod'
+import fs from 'node:fs/promises'
 
-import uploadConfig from "@/configs/upload";
-import { AppError } from "@/utils/AppError";
-import { DiskStorage } from "@/providers/diskstorage";
-import { prisma } from "@/database/prisma";
-import { env } from "@/env";
+import { Request, Response } from 'express'
+import { z, ZodError } from 'zod'
+
+import uploadConfig from '@/configs/upload'
+import { AppError } from '@/utils/AppError'
+import { prisma } from '@/database/prisma'
+import { cloudinary } from '@/configs/cloudinary'
 
 export class UploadController {
-    
-    async create(request: Request, response: Response){
-        
-        const diskStorage = new DiskStorage()
+  async create(request: Request, response: Response) {
+    try {
+      const fileSchema = z.object({
+        filename: z.string().min(1, 'Arquivo é obrigatório'),
+        path: z.string(),
+        mimetype: z.string().refine(
+          (type) =>
+            uploadConfig.ACCEPTED_IMAGE_TYPES.includes(
+              type
+            ),
+          `Formato de arquivo inválido. Formatos permitidos: ${uploadConfig.ACCEPTED_IMAGE_TYPES.join(
+            ', '
+          )}`
+        ),
+        size: z.number().positive().refine((size) => size <= uploadConfig.MAX_FILE_SIZE, `Arquivo excede o tamanho máximo de ${uploadConfig.MAX_SIZE}`),
+      })
 
-       try {
-        const fileSchema = z.object({
-            filename: z.string().min(1, "Arquivo é obrigatório"),
-            mimetype: z.string().refine((type) => uploadConfig.ACCEPTED_IMAGE_TYPES.includes(type), "Formato de arquivo inválido. Formatos permitidos: " + uploadConfig.ACCEPTED_IMAGE_TYPES),
-            size: z.number().positive().refine((size) => size <= uploadConfig.MAX_FILE_SIZE, "Arquivo excede o tamanho máximo de " + uploadConfig.MAX_SIZE)
-        }).passthrough()
+      const file = fileSchema.parse(request.file)
 
+      const userId = request.user?.id
 
-        const file = fileSchema.parse(request.file)
+      if (!userId) {
+        throw new AppError(
+          'Usuário não autenticado.',
+          401
+        )
+      }
 
-        const { filename } = await diskStorage.saveFile(file.filename)
+      const user = await prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+      })
 
-        const userId = request.user?.id
+      // remove avatar antigo do cloudinary
+      if (user?.imagePublicId) {
+        await cloudinary.uploader.destroy(
+          user.imagePublicId
+        )
+      }
 
-        if (!userId) {
-            
-            throw new AppError('Usuário não autenticado.', 401)
-        }
+      // upload da nova imagem
+      const uploadedImage =
+        await cloudinary.uploader.upload(
+          file.path,
+          {
+            folder: 'helpdesk-avatars',
+          }
+        )
 
-        const user = await prisma.user.findUnique({
-            where: {
-                id: userId
-            }
-        })
+      // remove arquivo temporário local
+      await fs.unlink(file.path)
 
-        if (user?.imageUrl) {
+      // atualiza usuário
+      await prisma.user.update({
+        where: {
+          id: userId,
+        },
 
-            const filenameToDelete = user.imageUrl.split('images/')[1]
+        data: {
+          imageUrl: uploadedImage.secure_url,
+          imagePublicId:
+            uploadedImage.public_id,
+        },
+      })
 
-            await diskStorage.deleteFile(filenameToDelete, 'upload')
-        }
+        response.status(201).json({
+        imageUrl: uploadedImage.secure_url,
+      })
+    } catch (error) {
+      console.log(error)
 
-        await prisma.user.update({
-            data: {imageUrl: `${env.BASE_URL}/images/${filename}`},
-            where: {
-                id: userId
-            }
-        })
+      // remove arquivo temporário caso exista
+      if (request.file?.path) {
+        try {
+          await fs.unlink(request.file.path)
+        } catch {}
+      }
 
-        response.json({filename})
-        return
+      if (error instanceof ZodError) {
+        throw new AppError(
+          error.issues[0].message
+        )
+      }
 
-       } catch (error) {
-        console.log(error)
-        if (error instanceof ZodError) {
+      throw error
+    }
+  }
 
-            if (request.file) {
-                
-                await diskStorage.deleteFile(request.file?.filename, 'tmp')
-            }
-            
-            throw new AppError(error.issues[0].message)
+  async delete(
+    request: Request,
+    response: Response
+  ) {
+    const userId = request.user?.id
 
-        }
-
-        throw error
-
-       }
+    if (!userId) {
+      throw new AppError(
+        'Usuário não autenticado.',
+        401
+      )
     }
 
-    async delete(request: Request, response: Response){
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
 
-        const diskStorage = new DiskStorage()
-
-        const userId = request.user?.id
-
-        if (!userId) {
-            
-            throw new AppError('Usuário não autenticado.', 4001)
-        }
-        
-        const user = await prisma.user.findUnique({
-            where: {
-                id: userId
-            }
-        })
-
-        if (user?.imageUrl) {
-
-            const filenameToDelete = user.imageUrl.split('images/')[1]
-
-            await diskStorage.deleteFile(filenameToDelete, 'upload')
-        }
-
-        await prisma.user.update({
-            where: {
-                id: userId
-            },
-            data: {
-                imageUrl: null
-            }
-        })
-
-        response.status(200).json()
-        return
+    // remove imagem do cloudinary
+    if (user?.imagePublicId) {
+      await cloudinary.uploader.destroy(
+        user.imagePublicId
+      )
     }
+
+    // remove dados do usuário
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+
+      data: {
+        imageUrl: null,
+        imagePublicId: null,
+      },
+    })
+
+    response.status(200).json()
+  }
 }
