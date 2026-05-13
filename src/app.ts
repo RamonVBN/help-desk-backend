@@ -23,7 +23,7 @@ app.use(cookieParser())
 
 app.use(express.json())
 
-app.use('/uploads', express.static(uploadConfig.UPLOADS_FOLDER))
+app.use('/images', express.static(uploadConfig.UPLOADS_FOLDER))
 
 app.use(routes)
 

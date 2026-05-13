@@ -40,13 +40,13 @@ export class UploadController {
 
         if (user?.imageUrl) {
 
-            const filenameToDelete = user.imageUrl.split('uploads/')[1]
+            const filenameToDelete = user.imageUrl.split('images/')[1]
 
             await diskStorage.deleteFile(filenameToDelete, 'upload')
         }
 
         await prisma.user.update({
-            data: {imageUrl: `${env.BASE_URL}/uploads/${filename}`},
+            data: {imageUrl: `${env.BASE_URL}/images/${filename}`},
             where: {
                 id: userId
             }
@@ -92,7 +92,7 @@ export class UploadController {
 
         if (user?.imageUrl) {
 
-            const filenameToDelete = user.imageUrl.split('uploads/')[1]
+            const filenameToDelete = user.imageUrl.split('images/')[1]
 
             await diskStorage.deleteFile(filenameToDelete, 'upload')
         }
