@@ -6,6 +6,11 @@ A aplicação é responsável por centralizar toda a lógica de negócio do sist
 
 ---
 
+## Frontend
+Interface web da aplicação HelpDesk:
+
+https://github.com/ramonvbn/help-desk-frontend
+
 # 🚀 Tecnologias
 
 ## Backend
