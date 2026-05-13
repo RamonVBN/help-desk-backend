@@ -1,4 +1,4 @@
-# 📌 HelpDesk API
+#  HelpDesk API
 
 API REST para gerenciamento de chamados de suporte de T.I., desenvolvida com **Node.js**, **Express.js** e **TypeScript**, utilizando autenticação via cookies HTTP-only, RBAC (Role-Based Access Control) e Prisma ORM.
 
@@ -6,10 +6,18 @@ A aplicação é responsável por centralizar toda a lógica de negócio do sist
 
 ---
 
+## Deploy
+
+https://help-desk-backend-noo8.onrender.com
+
+---
+
 ## Frontend
 Interface web da aplicação HelpDesk:
 
 https://github.com/ramonvbn/help-desk-frontend
+
+---
 
 # 🚀 Tecnologias
 
