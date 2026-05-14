@@ -7,5 +7,7 @@ const controller = new SessionController()
 
 sessionRoutes.post('/', controller.create)
 
+sessionRoutes.post('/demo', controller.demoCreate)
+
 sessionRoutes.delete('/', authenticate, controller.remove)
 

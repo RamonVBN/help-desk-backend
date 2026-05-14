@@ -1,42 +1,62 @@
 import { prisma } from '../../database/prisma'
+import { DEFAULT_DEMO_DATA } from '../../utils/defaultDemoData'
+
 
 async function main() {
 
+    // Demo user accounts seeds
+
     await prisma.user.upsert({
         where: {
-            email: 'admin@gmail.com'
+            id: DEFAULT_DEMO_DATA.ADMIN.id
         },
         create: {
-            name: 'Admin',
-            email: 'admin@gmail.com',
-            password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
-            role: 'ADMIN'
+            ...DEFAULT_DEMO_DATA.ADMIN
         },
         update: {
-            name: 'Admin',
-            email: 'admin@gmail.com',
-            password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
-            role: 'ADMIN'
+            ...DEFAULT_DEMO_DATA.ADMIN
         }
     })
 
     await prisma.user.upsert({
         where: {
-            email: 'client@gmail.com'
+            id: DEFAULT_DEMO_DATA.CLIENT.id
         },
         create: {
-            name: 'Client',
-            email: 'client@gmail.com',
-            password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
-            role: 'CLIENT'
+            ...DEFAULT_DEMO_DATA.CLIENT
         },
         update: {
-            name: 'Client',
-            email: 'client@gmail.com',
-            password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
-            role: 'CLIENT'
+            ...DEFAULT_DEMO_DATA.CLIENT
         }
     })
+
+    const demoTech = await prisma.user.upsert({
+        where: {
+           id: DEFAULT_DEMO_DATA.TECHNICIAN.id
+        },
+        create: {
+           ...DEFAULT_DEMO_DATA.TECHNICIAN
+        },
+        update: {
+           ...DEFAULT_DEMO_DATA.TECHNICIAN
+        }
+    })
+
+    await prisma.technicianInfo.upsert({
+    where: {
+        userId: demoTech.id
+    },
+    create: {
+        userId: demoTech.id,
+        availableHours: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+    },
+    update: {
+        userId: demoTech.id,
+        availableHours: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+    }
+    })
+
+    //
 
     const tech1 = await prisma.user.upsert({
         where: {
