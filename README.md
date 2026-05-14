@@ -193,35 +193,6 @@ Usuário cliente da plataforma:
 
 ---
 
-# 🌱 Seeds
-
-## Seed de desenvolvimento
-
-```bash
-npm run seed:dev
-```
-
-## Seed de produção
-
-```bash
-npm run seed:prod
-```
-
----
-
-# 📦 Scripts disponíveis
-
-| Script              | Descrição                           |
-| ------------------- | ----------------------------------- |
-| `npm run dev`       | Executa servidor em desenvolvimento |
-| `npm run build`     | Gera build da aplicação             |
-| `npm run start`     | Executa build de produção           |
-| `npm run test`      | Executa testes                      |
-| `npm run seed:dev`  | Executa seed de desenvolvimento     |
-| `npm run seed:prod` | Executa seed de produção            |
-
----
-
 # 🏗️ Arquitetura e padrões
 
 O projeto segue padrões como:
