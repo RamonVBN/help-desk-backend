@@ -4,17 +4,17 @@ async function main() {
 
     await prisma.user.upsert({
         where: {
-            email: 'ramon@gmail.com'
+            email: 'admin@gmail.com'
         },
         create: {
-            name: 'Ramon Barros',
-            email: 'ramon@gmail.com',
+            name: 'Admin',
+            email: 'admin@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'ADMIN'
         },
         update: {
-            name: 'Ramon Barros',
-            email: 'ramon@gmail.com',
+            name: 'Admin',
+            email: 'admin@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'ADMIN'
         }
@@ -62,13 +62,13 @@ async function main() {
             email: 'luffy@gmail.com'
         },
         create: {
-            name: 'Monkey D. Luffy',
+            name: 'Monkey D Luffy',
             email: 'luffy@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'TECHNICIAN'
         },
         update: {
-            name: 'Monkey D. Luffy',
+            name: 'Monkey D Luffy',
             email: 'luffy@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'TECHNICIAN'
@@ -81,11 +81,11 @@ async function main() {
         },
         create: {
             userId: tech1.id,
-            availableHours: ['08:00', '09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+            availableHours: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
         },
         update: {
             userId: tech1.id,
-            availableHours: ['08:00', '09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+            availableHours: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
         }
     })
 
@@ -95,11 +95,11 @@ async function main() {
         },
         create: {
             userId: tech2.id,
-            availableHours: ['10:00', '11:00', '12:00', '13:00', '14:00', '16:00', '17:00', '18:00', '19:00', '20:00']
+            availableHours: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
         },
         update: {
             userId: tech2.id,
-            availableHours: ['10:00', '11:00', '12:00', '13:00', '14:00', '16:00', '17:00', '18:00', '19:00', '20:00']
+            availableHours: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
         }
     })
 
@@ -109,11 +109,11 @@ async function main() {
         },
         create: {
             userId: tech3.id,
-            availableHours: ['12:00', '13:00', '14:00', '16:00', '18:00', '19:00', '20:00', '21:00', '22:00']
+            availableHours: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
         },
         update: {
             userId: tech3.id,
-            availableHours: ['12:00', '13:00', '14:00', '16:00', '18:00', '19:00', '20:00', '21:00', '22:00']
+            availableHours: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
         }
     })
 

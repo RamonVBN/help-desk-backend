@@ -7,8 +7,8 @@ async function main() {
 
     await prisma.user.create({
         data: {
-            name: 'Ramon Barros',
-            email: 'ramon@gmail.com',
+            name: 'Admin',
+            email: 'admin@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'ADMIN'
         }
@@ -34,7 +34,7 @@ async function main() {
 
     const tech3 = await prisma.user.create({
         data: {
-            name: 'Monkey D. Luffy',
+            name: 'Monkey D Luffy',
             email: 'luffy@gmail.com',
             password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
             role: 'TECHNICIAN'
