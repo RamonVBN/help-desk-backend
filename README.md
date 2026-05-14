@@ -25,7 +25,7 @@ https://github.com/ramonvbn/help-desk-frontend
 
 * [x] Node.js
 * [x] TypeScript
-* [x] Express 5
+* [x] Express 
 * [x] Prisma ORM
 * [x] PostgreSQL
 * [x] Zod
@@ -42,63 +42,15 @@ https://github.com/ramonvbn/help-desk-frontend
 
 ---
 
-# ⚙️ Instalação e uso
-
-## Clonar repositório
-
-```bash
-git clone https://github.com/ramonvbn/help-desk-backend.git
-```
-
-## Entrar na pasta do projeto
-
-```bash
-cd help-desk-backend
-```
-
-## Instalar dependências
-
-```bash
-npm install
-```
-
-## Rodar migrations
-
-```bash
-npx prisma migrate dev
-```
-
-## Executar seeds de desenvolvimento
-
-```bash
-npm run seed:dev
-```
-
-## Iniciar servidor
-
-```bash
-npm run dev
-```
-
-Servidor disponível em:
-
-```bash
-http://localhost:3333
-```
-
----
-
 # ⚙️ Variáveis de ambiente
 
-Crie um arquivo `.env`:
-
 ```env
-NODE_ENV=
 PORT=
-DATABASE_URL="..."
-JWT_SECRET="..."
+NODE_ENV=
 BASE_URL="..."
 CLIENT_BASE_URL="..."
+SECRET="..."
+DATABASE_URL="..."
 
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
@@ -121,7 +73,7 @@ A API utiliza:
 
 # 🪪 Cargos
 
-## ADMIN
+## ADMINISTRADOR
 
 Gerencia toda a aplicação:
 
@@ -131,7 +83,7 @@ Gerencia toda a aplicação:
 * Técnicos
 * Perfis de outros usuários
 
-## TECHNICIAN
+## TÉCNICO
 
 Responsável pelo atendimento técnico:
 
@@ -140,7 +92,7 @@ Responsável pelo atendimento técnico:
 * Gerencia serviços adicionais
 * Atualiza o próprio perfil
 
-## CLIENT
+## CLIENTE
 
 Usuário cliente da plataforma:
 
@@ -241,57 +193,6 @@ Usuário cliente da plataforma:
 
 ---
 
-# 🌱 Seeds
-
-## Seed padrão
-
-```bash
-npm run seed
-```
-
-## Seed de desenvolvimento
-
-```bash
-npm run seed:dev
-```
-
-## Seed de produção
-
-```bash
-npm run seed:prod
-```
-
----
-
-# 🧪 Testes
-
-## Executar testes
-
-```bash
-npm run test
-```
-
-A aplicação utiliza:
-
-* Jest
-* Supertest
-
----
-
-# 📦 Scripts disponíveis
-
-| Script              | Descrição                           |
-| ------------------- | ----------------------------------- |
-| `npm run dev`       | Executa servidor em desenvolvimento |
-| `npm run build`     | Gera build da aplicação             |
-| `npm run start`     | Executa build de produção           |
-| `npm run test`      | Executa testes                      |
-| `npm run seed`      | Executa seed padrão                 |
-| `npm run seed:dev`  | Executa seed de desenvolvimento     |
-| `npm run seed:prod` | Executa seed de produção            |
-
----
-
 # 🏗️ Arquitetura e padrões
 
 O projeto segue padrões como:
@@ -307,7 +208,7 @@ O projeto segue padrões como:
 
 # 👨‍💻 Autor
 
-Desenvolvido por Ramon Victor Barros Nunes.
+Desenvolvido por **Ramon Victor Barros Nunes**.
 
 * GitHub: [https://github.com/RamonVBN](https://github.com/RamonVBN)
 * LinkedIn: [https://linkedin.com/in/ramon-barros-4a107837a](https://linkedin.com/in/ramon-barros-4a107837a)
