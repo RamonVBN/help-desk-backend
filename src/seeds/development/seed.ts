@@ -14,6 +14,15 @@ async function main() {
         }
     })
 
+    await prisma.user.create({
+        data: {
+            name: 'Client',
+            email: 'client@gmail.com',
+            password: '$2b$08$eJz2bXdHSgbYZyyI0gttQOBp1WT93GZZUL5jDBeZWQTB9hmXyQx5W',
+            role: 'CLIENT'
+        }
+    })
+
     const tech1 = await prisma.user.create({
         data: {
             name: 'Eren Jaeger',
