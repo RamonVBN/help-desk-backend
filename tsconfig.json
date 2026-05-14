@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
       "module": "Node16",
+      "types": ["jest", "node"],
+      "isolatedModules": true,
       "target": "ES2022",
-      "lib": ["ES2023"],
+      "lib": ["ES2023", "DOM"],
       "paths": {
           "@/*": ["./src/*"]
       },

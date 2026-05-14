@@ -2,9 +2,6 @@
   "name": "help-desk-api",
   "version": "1.0.0",
   "main": "index.js",
-  "prisma": {
-    "seed": "node ./build/seeds/runSeeds.js"
-  },
   "scripts": {
     "dev": "tsx watch --env-file=.env src/server.ts",
     "build": "tsup src/* prisma/seeds/* --out-dir build",
@@ -40,7 +37,7 @@
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/multer": "^2.0.0",
-    "@types/node": "^24.0.3",
+    "@types/node": "^24.12.4",
     "@types/supertest": "^6.0.3",
     "i": "^0.3.7",
     "jest": "^30.0.5",

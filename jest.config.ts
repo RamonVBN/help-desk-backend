@@ -9,7 +9,7 @@ const config: Config = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
-  globalSetup: '<rootDir>/src/tests/utils/setup-global.ts',
+  globalSetup: '<rootDir>/tests/utils/setup-global.ts',
 
   // Stop running tests after `n` failures
   bail: true,
@@ -157,7 +157,7 @@ const config: Config = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ["<rootDir>/src/**/*.test.ts"],
+  testMatch: ["<rootDir>/**/*.test.ts"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1"
   }
