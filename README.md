@@ -73,7 +73,7 @@ A API utiliza:
 
 # 🪪 Cargos
 
-## ADMIN
+## ADMINISTRADOR
 
 Gerencia toda a aplicação:
 
@@ -83,7 +83,7 @@ Gerencia toda a aplicação:
 * Técnicos
 * Perfis de outros usuários
 
-## TECHNICIAN
+## TÉCNICO
 
 Responsável pelo atendimento técnico:
 
@@ -92,7 +92,7 @@ Responsável pelo atendimento técnico:
 * Gerencia serviços adicionais
 * Atualiza o próprio perfil
 
-## CLIENT
+## CLIENTE
 
 Usuário cliente da plataforma:
 
