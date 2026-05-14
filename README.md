@@ -25,7 +25,7 @@ https://github.com/ramonvbn/help-desk-frontend
 
 * [x] Node.js
 * [x] TypeScript
-* [x] Express 5
+* [x] Express 
 * [x] Prisma ORM
 * [x] PostgreSQL
 * [x] Zod
