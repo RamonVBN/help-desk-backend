@@ -208,7 +208,7 @@ O projeto segue padrões como:
 
 # 👨‍💻 Autor
 
-Desenvolvido por Ramon Victor Barros Nunes.
+Desenvolvido por **Ramon Victor Barros Nunes**.
 
 * GitHub: [https://github.com/RamonVBN](https://github.com/RamonVBN)
 * LinkedIn: [https://linkedin.com/in/ramon-barros-4a107837a](https://linkedin.com/in/ramon-barros-4a107837a)
