@@ -192,6 +192,14 @@ Usuário cliente da plataforma:
 * Apenas TECHNICIAN
 
 ---
+# 🧪 Testes
+
+## Executar testes
+
+```bash
+npm run test
+```
+---
 
 # 🏗️ Arquitetura e padrões
 
