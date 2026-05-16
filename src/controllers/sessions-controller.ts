@@ -67,27 +67,23 @@ export class SessionController {
 
         const { role } = bodySchema.parse(request.body)
 
-        const user = await prisma.user.findFirstOrThrow({
+        const user = await prisma.user.upsert({
             where: {
-                role,
-                isDemoAccount: true
-            }
-        })
-
-        const updatedUser = await prisma.user.update({
-            where: {
-                id: user.id
+                id: DEFAULT_DEMO_DATA[role].id
             },
-            data: {
+            create: {
+                ...DEFAULT_DEMO_DATA[role]
+            },
+            update: {
                 ...DEFAULT_DEMO_DATA[role]
             }
         })
 
         const { secret, expiresIn } = authConfig.jwt
 
-        const token = sign({ role: updatedUser.role }, secret,
+        const token = sign({ role: user.role }, secret,
             {
-                subject: updatedUser.id,
+                subject: user.id,
                 expiresIn: `${expiresIn}D`
             }
         )
